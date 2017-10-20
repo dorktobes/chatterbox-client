@@ -12,7 +12,7 @@ body {
     background: white;
     padding: 50px 60px;
     border: solid #ddd;
-    border-width: 0 1px 1px 1px;
+    border-width: 3px 3px 3px 3px;
 }
 
 #main h1 {
@@ -20,6 +20,8 @@ body {
     font-size: 35px;
     margin-bottom: 5px;
     padding: 5px;
+    color: blue;
+    background-color: orange;
 }
 
 #main h1 span {
