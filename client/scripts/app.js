@@ -68,7 +68,11 @@ var app = {
     
     //output nothing
     
-  }
+  },
+  sendMessage: function () {
+    console.log('I made a button');
+  },
+  
   
 };
 
