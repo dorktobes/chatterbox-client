@@ -1,26 +1,34 @@
 // YOUR CODE HERE:
 // debugger;
 var app = {
+  server: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
   init: function() {},
   
   send: function (message) {
     $.ajax({
-      // This is the url you should use to communicate with the parse API server.
       url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
       type: 'POST',
-      data: message,
+      data: JSON.stringify(message),
       contentType: 'application/json',
       success: function (data) {
         console.log('chatterbox: Message sent by Seanzy');
       },
       error: function (data) {
-        // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
         console.error('chatterbox: Failed to send message', data);
       }
     });
   }, 
   fetch: function () {
-    $.get('http://parse.sfm8.hackreactor.com/chatterbox/classes/messages', console.dir);
+    $.ajax({
+      url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
+      type: 'GET',
+      success: function (data) {
+        console.log('chatterbox: Message sent by Seanzy', data);
+      },
+      error: function (data) {
+        console.error('chatterbox: Failed to send message', data);
+      }
+    });
   },
   
 };

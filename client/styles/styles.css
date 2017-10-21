@@ -12,7 +12,9 @@ body {
     background: white;
     padding: 50px 60px;
     border: solid #ddd;
-    border-width: 3px 3px 3px 3px;
+    border-width: 5px 5px 5px 5px;
+    color: black;
+    height: auto;
 }
 
 #main h1 {
@@ -20,8 +22,24 @@ body {
     font-size: 35px;
     margin-bottom: 5px;
     padding: 5px;
-    color: blue;
+    color: midnightblue;
     background-color: orange;
+    border-radius: 15px;
+}
+
+.input {
+    height: 300px;
+}
+
+.button {
+    background-color: orange;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    color: midnightblue;
+    font-weight: bold;
+    
 }
 
 #main h1 span {
