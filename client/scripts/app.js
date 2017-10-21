@@ -38,6 +38,9 @@ var app = {
       }
     });
   },
+  clearMessages: function () {
+    $('#chats').empty();
+  },
   renderMessage: function (message) { //prepends a div to our chats div
     //input message object
     
@@ -74,8 +77,15 @@ var app = {
 // });
 
 $(window).ready(function () {
-  app.fetch();
+  getMessages();
 });
+
+var getMessages = function() {
+  
+  app.fetch();
+  
+  setTimeout(getMessages, 60000);
+};
 
   
   
