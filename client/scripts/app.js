@@ -102,8 +102,8 @@ var app = {
   renderRoom: function (roomname) {
     app.clearMessages(); 
     $.ajax({
-      url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages', //?where={"roomname":"' + roomname + '"}',
-      contents: {'roomname': roomname},
+      url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages?where={"roomname":"' + roomname + '"}',
+      // contents: {'roomname': roomname},
       type: 'GET',
       success: function (data) {
         var messages = data.results; 
@@ -122,9 +122,6 @@ var app = {
     message.text = text;
     message.username = username;
     app.send(message);
-    
-    
-    
   },
   
   
@@ -136,6 +133,15 @@ $(document).ready(function () {
   $("#messageSubmit").on("click", function() { 
     app.sendMessage(); 
   }); 
+  
+  $("#roomSelect").on("change", function() {
+    var newRoom = $("#roomSelect").find('option:selected').text();
+    newRoom = newRoom.split(' ').join('%20');
+    console.log(newRoom);
+    app.renderRoom(newRoom);
+    
+  });
+  
   setTimeout(getMessages, 60000);
 });
 
