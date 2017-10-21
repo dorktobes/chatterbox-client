@@ -9,7 +9,7 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script>
-      // YOU DO NOT NEED TO EDIT THIS CODE
+      // // YOU DO NOT NEED TO EDIT THIS CODE
       if (!/(&|\?)username=/.test(window.location.search)) {
         var newSearch = window.location.search;
         if (newSearch !== '' & newSearch !== '?') {
@@ -29,8 +29,8 @@
       <!-- Your HTML goes here! -->
       <form>  
         <input class="input" type="text" name="lastname" value="">
-        <button onclick="app.sendMessage()" class="button">Submit</button>
-        
+        <input type="button" value="Submit" id="messageSubmit">
+          
         <div>Select a room</div>  
         <select id='roomSelect'>
         </select>

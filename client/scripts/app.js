@@ -22,6 +22,7 @@ var app = {
         
         for (var i = 0; i < uniqueRoomNames.length; i++) {
           var $option = $(`<option value=${uniqueRoomNames[i]}>${uniqueRoomNames[i]}</option>`);
+          // console.log(uniqueRoomNames[i]);
           $($option).appendTo('#roomSelect');
         }
         //for every roomname in unique list, create a dom object option and append to dropdown
@@ -52,6 +53,7 @@ var app = {
         
         console.log('run render message', data);
         for (var i = 0; i < messages.length; i++) {
+          
           app.renderMessage(messages[i]);
           
         }
@@ -113,20 +115,28 @@ var app = {
     });
   },
   sendMessage: function () {
-    console.log('I made a button');
+    var message = {};
+    var text = $("input:text").val(); 
+    var username = window.location.search.split('=')[1];
+    username = username.split('%20').join(' ');
+    message.text = text;
+    message.username = username;
+    app.send(message);
+    
+    
+    
   },
   
   
 };
 
-// $(window).ready(function() {
-//     console.log( "ready!" );
-// });
-
-$(window).ready(function () {
+$(document).ready(function () {
   app.init();
   
-  //setTimeout(getMessages, 60000);
+  $("#messageSubmit").on("click", function() { 
+    app.sendMessage(); 
+  }); 
+  setTimeout(getMessages, 60000);
 });
 
 var getMessages = function() {
@@ -137,7 +147,7 @@ var getMessages = function() {
 };
 
   
-// <script> $('body').css({'transform': 'rotate(180deg)'})
+
   
   
   
