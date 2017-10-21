@@ -2,7 +2,34 @@
 // debugger;
 var app = {
   server: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
-  init: function() {},
+  init: function() {
+    $.ajax({
+      url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
+      type: 'GET',
+      success: function (data) {
+        var roomNames = [];
+        var messages = data.results;
+        console.log('run render message', data);
+        
+        for (var i = 0; i < messages.length; i++) {
+          roomNames.push(messages[i].roomname);
+          app.renderMessage(messages[i]);
+          
+        }
+        //reomve dupliacte roomnames
+        var uniqueRoomNames = _.uniq(roomNames);
+        console.log(uniqueRoomNames);
+        
+        for (var i = 0; i < uniqueRoomNames.length; i++) {
+          var $option = $(`<option value=${uniqueRoomNames[i]}>${uniqueRoomNames[i]}</option>`);
+          $($option).appendTo('.dropdown');
+        }
+        //for every roomname in unique list, create a dom object option and append to dropdown
+        console.log('run render message', data);
+      },  
+    });
+  },
+  
   
   send: function (message) {
     $.ajax({
@@ -24,6 +51,7 @@ var app = {
       type: 'GET',
       success: function (data) {
         var messages = data.results;
+        
         console.log('run render message', data);
         for (var i = 0; i < messages.length; i++) {
           app.renderMessage(messages[i]);
@@ -81,7 +109,9 @@ var app = {
 // });
 
 $(window).ready(function () {
-  getMessages();
+  app.init();
+  
+  setTimeout(getMessages, 60000);
 });
 
 var getMessages = function() {

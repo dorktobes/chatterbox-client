@@ -115,5 +115,11 @@ form input[type=text] {
     height: auto;
 }
 
+.dropdown {
+    width: 350px;
+    height: 25px;
+    margin-top: 25px;
+}
+
 
 
