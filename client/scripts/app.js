@@ -23,19 +23,59 @@ var app = {
       url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
       type: 'GET',
       success: function (data) {
-        console.log('chatterbox: Message sent by Seanzy', data);
+        var messages = data.results;
+        console.log('run render message', data);
+        for (var i = 0; i < messages.length; i++) {
+          app.renderMessage(messages[i]);
+          
+        }
+        console.log('run render message', data);
+        
+        
       },
       error: function (data) {
         console.error('chatterbox: Failed to send message', data);
       }
     });
   },
+  renderMessage: function (message) { //prepends a div to our chats div
+    //input message object
+    
+    //create an empty div using jquery
+    
+    //build this message div
+    var $message = document.createElement("div");
+    $($message).addClass("message");
+    
+    //build username div and append to message div
+    var $user = $("<div>" + message.username + "</div>");
+    // var $user = $(`<div> ${message.user} </div>`);
+    $($user).addClass("user");
+    
+    //build text div and append to message div
+    var $text = $("<div>" + message.text + "</div>");
+    // var $text = $(`<div> ${message.text} </div>`);
+    $($text).addClass("text");
+    
+    $($message).append($user);
+    $($message).append($text);
+    $('#chats').prepend($message);
+    
+    //prepend message div to chats div
+    
+    //output nothing
+    
+  }
   
 };
 
+// $(window).ready(function() {
+//     console.log( "ready!" );
+// });
 
-
-//$(window).onready(function () {});
+$(window).ready(function () {
+  app.fetch();
+});
 
   
   
