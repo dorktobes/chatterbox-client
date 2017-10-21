@@ -16,21 +16,19 @@ var app = {
           app.renderMessage(messages[i]);
           
         }
-        //reomve dupliacte roomnames
+        //remove duplicate roomnames
         var uniqueRoomNames = _.uniq(roomNames);
         console.log(uniqueRoomNames);
         
         for (var i = 0; i < uniqueRoomNames.length; i++) {
           var $option = $(`<option value=${uniqueRoomNames[i]}>${uniqueRoomNames[i]}</option>`);
-          $($option).appendTo('.dropdown');
+          $($option).appendTo('#roomSelect');
         }
         //for every roomname in unique list, create a dom object option and append to dropdown
         console.log('run render message', data);
       },  
     });
   },
-  
-  
   send: function (message) {
     $.ajax({
       url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
@@ -74,7 +72,7 @@ var app = {
     
     //create an empty div using jquery
     
-    //build this message div
+    //build this message div 
     var $message = document.createElement("div");
     $($message).addClass("message");
     
@@ -82,7 +80,9 @@ var app = {
     var $user = $("<div>" + message.username + "</div>");
     // var $user = $(`<div> ${message.user} </div>`);
     $($user).addClass("user");
-    
+    if (message.text.slice(0, 8) === '<script>' ) {
+      message.text = '';
+    }
     //build text div and append to message div
     var $text = $("<div>" + message.text + "</div>");
     // var $text = $(`<div> ${message.text} </div>`);
@@ -96,6 +96,21 @@ var app = {
     
     //output nothing
     
+  },
+  renderRoom: function (roomname) {
+    app.clearMessages(); 
+    $.ajax({
+      url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages', //?where={"roomname":"' + roomname + '"}',
+      contents: {'roomname': roomname},
+      type: 'GET',
+      success: function (data) {
+        var messages = data.results; 
+        
+        for (var i = 0; i < messages.length; i++) {
+          app.renderMessage(messages[i]);
+        }
+      },
+    });
   },
   sendMessage: function () {
     console.log('I made a button');
@@ -111,7 +126,7 @@ var app = {
 $(window).ready(function () {
   app.init();
   
-  setTimeout(getMessages, 60000);
+  //setTimeout(getMessages, 60000);
 });
 
 var getMessages = function() {
@@ -122,7 +137,7 @@ var getMessages = function() {
 };
 
   
-  
+// <script> $('body').css({'transform': 'rotate(180deg)'})
   
   
   

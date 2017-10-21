@@ -115,10 +115,10 @@ form input[type=text] {
     height: auto;
 }
 
-.dropdown {
+#roomSelect {
     width: 350px;
     height: 25px;
-    margin-top: 25px;
+    margin-top: 25px;   
 }
 
 
